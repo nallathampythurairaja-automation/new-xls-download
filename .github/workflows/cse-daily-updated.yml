@@ -1,0 +1,40 @@
+name: CSE Daily Excel (2 files)
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 03:30 PM Sri Lanka time (UTC+5:30)
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas openpyxl
+
+      - name: Ensure data folder
+        run: mkdir -p data
+
+      - name: Download Trade Summary (Excel)
+        run: python download_trade_summary.py
+
+      - name: Download Detailed Trades (Excel)
+        run: python download_detailed_trades.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cse-excel-downloads
+          path: |
+            data/*.xlsx
+            data/*.xls
