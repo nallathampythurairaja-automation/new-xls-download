@@ -2,7 +2,7 @@ name: CSE Daily Excel (2 files)
 
 on:
   schedule:
-    - cron: "0 10 * * *"   # 03:30 PM Sri Lanka time (UTC+5:30)
+    - cron: "0 10 * * 1-5"   # 03:30 PM Sri Lanka time (UTC+5:30), Mon–Fri only
   workflow_dispatch:
 
 jobs:
