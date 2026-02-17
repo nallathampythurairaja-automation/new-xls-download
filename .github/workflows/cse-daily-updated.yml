@@ -26,10 +26,10 @@ jobs:
         run: mkdir -p data
 
       - name: Download Trade Summary (Excel)
-        run: python download_trade_summary.py
+        run: python download_api2_xls_fixed.py
 
       - name: Download Detailed Trades (Excel)
-        run: python download_detailed_trades.py
+        run: python download_api_xlsx_fixed.py
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
